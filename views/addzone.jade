@@ -1,0 +1,21 @@
+extends layout
+
+block mainContent
+	h2 Adding zone
+	
+	p
+		a(href='/', class="button small pink") &laquo;  Back to index
+	
+	if error
+		p.error Something went terribly bad: #{error}
+	
+	form(method='post')
+		div(class='listRow')
+			label Zone to add:
+				input(name='name', value='#{name}')
+		
+			label Copy records from zone (can be empty):
+				input(name='copyFrom', value='')
+	
+		div.formFooter
+			input(type='submit', value='Add')
