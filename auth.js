@@ -3,6 +3,9 @@ var	passport = require('passport'),
 
 var	rest = require("./rest");
 
+var request = require('request');
+
+
 exports.configure = function (login_url, logout_url, app) {
 	passport.serializeUser(function(user, callback) {
 		callback(null, user);
@@ -30,12 +33,17 @@ exports.configure = function (login_url, logout_url, app) {
 	});
 
 	app.post(login_url + "/:targetURL", function (req, res, next) {
-		var target = req.param("targetURL", "/");
-		passport.authenticate('local', {
-			failureRedirect: login_url + "/" + encodeURIComponent(target),
-			successRedirect: target
+		if(req.body.signup == "Sign Up"){
+			res.redirect('/signup');
+			//return next();
+		} else {
+			var target = req.param("targetURL", "/");
+			passport.authenticate('local', {
+				failureRedirect: login_url + "/" + encodeURIComponent(target),
+				successRedirect: target
+			}
+			)(req, res, next);
 		}
-		)(req, res, next);
 	});
 
 	app.get(logout_url, function (req, res) {
@@ -43,8 +51,34 @@ exports.configure = function (login_url, logout_url, app) {
 		res.redirect('/');
 	});
 
+	/*app.get(login_url + "/:targetURL" + "signup", function (req, res, next) {
+		res.render('signup.jade', { user: req.user });
+	});*/
+
+	app.get('/signup', function (req, res, next) {
+		res.render('signup.jade', { user: req.user });
+	});
+	
+	app.post('/signup', function (req, res, next) {
+		
+		rest.executeSignup(req, res, req.body.authusername, req.body.authpassword, 'AddAccount', [req.body.username, req.body.password], function (error, response) {
+			if (error) {
+				res.redirect('/signup');
+			} else {
+				rest.executeSignup(req, res, req.body.authusername, req.body.authpassword, 'AddNameserverGroup', [req.body.username], function (error, response) {
+					if (error) {
+						res.redirect('/signup');
+					} else {
+						res.redirect('/');
+					}
+				});
+			}
+		});
+	});
+
+	
 	exports.ensureAuthenticated = function ensureAuthenticated(req, res, next) {
-		if (req.isAuthenticated()) { return next(); }
+		if (req.isAuthenticated()||req.url == "/signup") { return next(); }
 		res.redirect(login_url + "/" + encodeURIComponent(req.url));
 	};
 

@@ -1,8 +1,8 @@
 var 	auth = require('./auth');
 var 	rest = require('./rest');
 
-exports.configure = function (app) {
-
+exports.configure = function (app) {	
+	
 	app.get('/css/', function (req, res) {
 		res.contentType('text/css');
 		res.sendfile(__dirname + '/css/atomiadns.css');
