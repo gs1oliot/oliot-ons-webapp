@@ -44,7 +44,7 @@
 	textarea.importData {width: 100%; height: 200px;}
 
 	/* LOGIN FORM */
-	span.login {display: block; float: left; width: 100px; padding: 5px 0;}
+	span.login {display: block; float: left; width: 150px; padding: 5px 0;}
 	input.login {width: 180px; padding: 5px;}
 
 	/* BUTTONS - GENERIC */
