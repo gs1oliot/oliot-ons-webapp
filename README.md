@@ -2,14 +2,16 @@
 
 # webapp
 
+Nodejs based web application to manage ONS records
 
 
-## Usage
+## LICENSE
 
+This project uses the ISC-license.
 
+## More information
 
-## Developing
-
+This project is forked from Atomiadns's web app (https://github.com/atomia/atomiadns/tree/develop/webapp)
 
 
 ### Tools

@@ -32,6 +32,7 @@ exports.configure = function (app) {
 		//soa.push(rest.nameserverGroupName);
 		soa.push(req.user.email);
 		//console.log('%s', rest.nameserverGroupName);
+		//console.log(soa);
 		rest.executeOperation(req, res, req.user, "AddZone", soa, function (error, response) {
 			if (error) {
 				res.render('addzone.jade', { user: req.user, name: name, error: error });
@@ -114,7 +115,7 @@ exports.configure = function (app) {
 
 		var records = req.body.records;
 		var newrecords = req.body.newrecords;
-
+		
 		if (records != null && records.id != null && records.id instanceof Array && newrecords != null && newrecords.id != null && newrecords.id instanceof Array) {
 			var recordsParam = [];
 			for (var idx = 0; idx < records.id.length; idx++) {
@@ -140,7 +141,9 @@ exports.configure = function (app) {
 			}
 			newrecords = newRecordsParam;
 		}
-
+		//console.log(name);
+		//console.log(records);
+		//console.log(newrecords);
 		rest.executeOperation(req, res, req.user, "EditDnsRecords", [ name, records ], function (error, response) {
 			rest.executeOperation(req, res, req.user, "AddDnsRecords", [ name, newrecords ], function (adderror, response) {
 				if (!adderror) {
