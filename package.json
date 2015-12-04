@@ -8,6 +8,6 @@
 		"passport":		">= 0.1.5",
 		"passport-local":	">= 0.1.0",
 		"request":		"= 2.9.100",
-		"native-dns": "=0.7.0"
+		"native-dns": ">=0.7.0"
 	}
 }
