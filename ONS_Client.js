@@ -1,19 +1,22 @@
 var dns = require('native-dns');
 var util = require('util');
+var argv =  require('optimist')
+		.usage('Usage: $0 -n [num] -t [num]')
+		.demand(['n','t'])
+		.argv;
 
 
 var start = Date.now();
 var totalNoResponse=0;
-for(var i = 0; i< 1000; ++i){
+for(var i = 0; i< argv.n; ++i){
 var question = dns.Question({
   name: '3.5.1.0.0.0.0.0.0.0.0.8.8.gtin.gs1.id.onsepc.kr',
   type: 'NAPTR',
 });
-//console.log(start);
 var req = dns.Request({
   question: question,
   server: { address: '143.248.1.177', port: 53, type: 'udp' },
-  timeout: 1000,
+  timeout: argv.t,
 });
 
 req.on('timeout', function () {
