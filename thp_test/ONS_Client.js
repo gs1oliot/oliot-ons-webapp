@@ -2,7 +2,7 @@ var dns = require('native-dns');
 var util = require('util');
 var argv =  require('optimist')
 		.usage('Usage: $0 -n [num] -t [num] -a [string]')
-		.default({n:1000, t:1000, a:'143.248.1.177'})
+		.default({n:1000, t:1000, a:'143.248.53.101'})
 		.argv;
 
 
