@@ -20,7 +20,7 @@ var question = dns.Question({
 });
 var req = dns.Request({
   question: question,
-  server: { address: '143.248.56.100', port: 53, type: 'udp' },
+  server: { address: address, port: 53, type: 'udp' },
   timeout: argv.t,
   cache: false,
 });
