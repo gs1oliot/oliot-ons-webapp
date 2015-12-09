@@ -7,8 +7,6 @@
 		"jade":			">= 0.27.7",
 		"passport":		">= 0.1.5",
 		"passport-local":	">= 0.1.0",
-		"request":		"= 2.9.100",
-		"optimist":		">=0.6.1",
-		"native-dns": 	">=0.7.0"
+		"request":		"= 2.9.100"
 	}
 }
