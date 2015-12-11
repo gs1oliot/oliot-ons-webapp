@@ -7,7 +7,8 @@ var argv =  require('optimist')
 
 
 var start = Date.now();
-var totalNoResponse=0;
+var totalFailResponse=0;
+var totalSuccessResponse=0;
 
 var num = argv.n; 
 var time = argv.t;
@@ -26,13 +27,20 @@ var req = dns.Request({
 });
 
 req.on('timeout', function () {
-	totalNoResponse++;
-	console.log(totalNoResponse);
+	totalFailResponse++;
+	if(totalFailResponse + totalSuccessResponse == num){
+		console.log("Success: "+totalSuccessResponse+", Fail: " + totalFailResponse);
+	}
+	//console.log(totalNoResponse);
   //console.log('Timeout in making request');
 });
 
 req.on('message', function (err, answer) {
   answer.answer.forEach(function (a) {
+	  totalSuccessResponse++
+		if(totalFailResponse + totalSuccessResponse == num){
+			console.log("Success: "+totalSuccessResponse+", Fail: " + totalFailResponse);
+		}
 	  //totalResponse++;
 	  //console.log(totalResponse);
     //console.log(a);
