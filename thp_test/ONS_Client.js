@@ -29,7 +29,9 @@ var req = dns.Request({
 req.on('timeout', function () {
 	totalFailResponse++;
 	if(totalFailResponse + totalSuccessResponse == num){
+		var delta = (Date.now()) - start;
 		console.log("Success: "+totalSuccessResponse+", Fail: " + totalFailResponse);
+		console.log("Finished time: "+delta+"ms");
 	}
 	//console.log(totalNoResponse);
   //console.log('Timeout in making request');
@@ -39,7 +41,9 @@ req.on('message', function (err, answer) {
   answer.answer.forEach(function (a) {
 	  totalSuccessResponse++
 		if(totalFailResponse + totalSuccessResponse == num){
+			var delta = (Date.now()) - start;
 			console.log("Success: "+totalSuccessResponse+", Fail: " + totalFailResponse);
+			console.log("Finished time: " +delta+"ms");
 		}
 	  //totalResponse++;
 	  //console.log(totalResponse);
