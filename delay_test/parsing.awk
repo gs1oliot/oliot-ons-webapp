@@ -10,5 +10,7 @@ BEGIN { answer = 0 }
 }
 /^;; Query time:/ {
 	if( answer == 1)
-		printf("%s %s\n", response, $4);
+		printf("%s\t%s\n", response, $4);
+	else
+		printf("\n");
 }

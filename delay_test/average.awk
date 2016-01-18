@@ -3,8 +3,10 @@ BEGIN{
 	num = 0;
 }
 {
-	total += $2
-	++num
+	if( $2>=0 ) {
+		total += $2
+		++num
+	}
 }
 END {
 	printf("Success: %d, Fail: %d\n", num, n-num);
